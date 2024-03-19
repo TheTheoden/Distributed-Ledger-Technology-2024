@@ -69,8 +69,10 @@ if __name__ == "__main__":
             with open(args.file, "r") as file:
                 message = file.read()
                 public_key = tuple(args.public_key)
-                encrypted_message = encrypt(message, public_key)
-                print("Encrypted message:", encrypted_message)
+                encrypted_message: list[int] = encrypt(message, public_key)
+                print("Encrypted message:")
+                for word in encrypted_message:
+                    print(word, end = ' ')
 
     elif args.operation == "decrypt":
         if not args.file or not args.private_key:
@@ -80,10 +82,9 @@ if __name__ == "__main__":
                 encrypted_message = list(map(int, file.read().split()))
                 private_key = tuple(args.private_key)
                 decrypted_message = decrypt(encrypted_message, private_key)
-                print("Decrypted message:", decrypted_message)
+                print("Decrypted message:\n", decrypted_message, sep = '')
 
     elif args.operation == "generate_keys":
         public_key, private_key = generate_keys()
         print("Public key:", public_key)
         print("Private key:", private_key)
-
