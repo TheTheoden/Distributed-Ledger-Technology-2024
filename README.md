@@ -1,5 +1,13 @@
 # RSA
 
+## Requirements
+
+- Python 3.x
+
+## Setup
+
+To setup the script simply download the rsa.py file
+
 ## Usage
 
 ```
