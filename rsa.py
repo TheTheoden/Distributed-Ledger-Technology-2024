@@ -3,22 +3,22 @@ import math
 import argparse
 
 def generate_keys():
-    p = generate_prime_number()
-    q = generate_prime_number()
+    p: int = generate_prime_number()
+    q: int = generate_prime_number()
 
-    n = p * q
+    n: int = p * q
 
-    phi = (p - 1) * (q - 1)
+    phi: int = (p - 1) * (q - 1)
 
-    e = choose_public_key(phi)
+    e: int = choose_public_key(phi)
 
-    d = compute_private_key(e, phi)
+    d: int = compute_private_key(e, phi)
 
     return (n, e), (n, d)
 
 def generate_prime_number():
     while True:
-        num = random.randint(2, 100)
+        num: int = random.randint(2, 100)
         if is_prime(num):
             return num
 
@@ -32,12 +32,12 @@ def is_prime(num):
 
 def choose_public_key(phi):
     while True:
-        e = random.randint(2, phi)
+        e: int = random.randint(2, phi)
         if math.gcd(e, phi) == 1:
             return e
 
 def compute_private_key(e, phi):
-    d = 0
+    d: int = 0
     while True:
         d += 1
         if (d * e) % phi == 1:
@@ -50,7 +50,7 @@ def encrypt(message, public_key):
 
 def decrypt(encrypted_message, private_key):
     n, d = private_key
-    decrypted_message = [chr(pow(char, d, n)) for char in encrypted_message]
+    decrypted_message: list[str] = [chr(pow(char, d, n)) for char in encrypted_message]
     return "".join(decrypted_message)
 
 if __name__ == "__main__":
